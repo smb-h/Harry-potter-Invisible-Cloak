@@ -10,8 +10,3 @@ I will code with python and use the opencv library.
 * python 3.5 and above
 * opencv
 
-
-Blogging website: www.machinelearningman.com
-
-
-YouTube Channel: https://www.youtube.com/channel/UC4Ljpn7LRUwCrTz8inAksNA?view_as=subscriber
