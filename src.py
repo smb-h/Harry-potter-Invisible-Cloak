@@ -20,7 +20,7 @@ count = 0
 background = 0
 
 ## Capture the background in range of 60
-for i in range(60):
+for _ in range(60):
     ret,background = cap.read()
 background = np.flip(background,axis=1)
 
@@ -32,7 +32,7 @@ while(cap.isOpened()):
         break
     count+=1
     img = np.flip(img,axis=1)
-    
+
     ## Convert the color space from BGR to HSV
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
@@ -50,19 +50,19 @@ while(cap.isOpened()):
     ## Open and Dilate the mask image
     mask1 = cv2.morphologyEx(mask1, cv2.MORPH_OPEN, np.ones((3,3),np.uint8))
     mask1 = cv2.morphologyEx(mask1, cv2.MORPH_DILATE, np.ones((3,3),np.uint8))
- 
- 
+
+
     ## Create an inverted mask to segment out the red color from the frame
     mask2 = cv2.bitwise_not(mask1)
- 
- 
+
+
     ## Segment the red color part out of the frame using bitwise and with the inverted mask
     res1 = cv2.bitwise_and(img,img,mask=mask2)
 
     ## Create image showing static background frame pixels only for the masked region
     res2 = cv2.bitwise_and(background, background, mask = mask1)
- 
- 
+
+
     ## Generating the final output and writing
     finalOutput = cv2.addWeighted(res1,1,res2,1,0)
     out.write(finalOutput)
